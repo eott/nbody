@@ -1,3 +1,6 @@
+var posX = 0;
+var posY = 0;
+
 function doMovement() {
     var dx = 0;
     var dy = 0;
