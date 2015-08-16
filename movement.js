@@ -20,6 +20,11 @@ function doMovement() {
         var s = (g * planets[i][2]) / (r * r);
         vX += s * Math.sin(0.5 * Math.PI * (dX/r));
         vY += s * Math.sin(0.5 * Math.PI * (dY/r));
+
+        if (r < 30) {
+            collided = true;
+            return;
+        }
     }
 
     posX += vX;

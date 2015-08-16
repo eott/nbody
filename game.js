@@ -4,16 +4,17 @@ var fc = 0;
 var planets = [[100,100,1.2],[700,400,0.1]];
 registerListeners();
 mainLoop = window.setInterval("upkeep()", 15);
+collided = false;
 
 function upkeep() {
     fc++;
-    doMovement();
-
     drawBackground();
-    drawPlayerAt(posX, posY);
     drawPlanets();
-
-    if (fc > 10) {
-        background();
+    if (!collided) {
+        doMovement();
+        drawPlayerAt(posX, posY);
+    } else {
+        drawExplosion();
     }
+    // background();
 }
