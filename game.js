@@ -8,4 +8,7 @@ mainLoop = window.setInterval("upkeep()", 15);
 function upkeep() {
     fc++;
     ctx.clearRect(0, 0, can.width, can.height);
+
+    doMovement();
+    drawPlayerAt(posX, posY);
 }

@@ -9,3 +9,7 @@ function circle(x, y, radius, color, width, fill) {
         ctx.stroke();
     }
 }
+
+function drawPlayerAt(x, y) {
+    circle(x, y, 20, '#ddd', 1, true);
+}
