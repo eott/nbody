@@ -12,4 +12,8 @@ function upkeep() {
     drawBackground();
     drawPlayerAt(posX, posY);
     drawPlanets();
+
+    if (fc > 10) {
+        background();
+    }
 }
