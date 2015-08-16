@@ -1,5 +1,5 @@
-var posX = 0;
-var posY = 0;
+var posX = 500;
+var posY = 400;
 
 function doMovement() {
     var dx = 0;
