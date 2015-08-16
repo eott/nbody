@@ -1,6 +1,8 @@
 var posX = 500;
 var posY = 400;
-var grav = 5;
+var vX = 1;
+var vY = -1;
+var g = -5000;
 
 function doMovement() {
     var dx = 0;
@@ -8,9 +10,18 @@ function doMovement() {
 
     if (keyStatus == 1) {
         keyStatus = 2;
-        grav *= -1;
+        g *= -1;
     }
 
-    posX += dx;
-    posY += dy;
+    for (var i = 0; i < planets.length; i++) {
+        var dX = posX - planets[i][0];
+        var dY = posY - planets[i][1];
+        var r = Math.sqrt(dX*dX+dY*dY);
+        var s = (g * planets[i][2]) / (r * r);
+        vX += s * Math.sin(0.5 * Math.PI * (dX/r));
+        vY += s * Math.sin(0.5 * Math.PI * (dY/r));
+    }
+
+    posX += vX;
+    posY += vY;
 }
