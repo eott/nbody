@@ -1,9 +1,3 @@
-var posX = 500;
-var posY = 400;
-var vX = 1;
-var vY = -1;
-var g = -3000;
-
 function doMovement() {
     var dx = 0;
     var dy = 0;

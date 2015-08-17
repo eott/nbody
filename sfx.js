@@ -1,7 +1,3 @@
-var mi = 0;
-var audio;
-var nextAudio;
-
 function background() {
     if (audio && !audio.ended) {
         return;
