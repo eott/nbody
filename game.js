@@ -1,6 +1,7 @@
 var can = document.getElementById("screen");
 var ctx = can.getContext("2d");
 var fc = 0;
+var eFc = 0;
 var planets;
 registerListeners();
 mainLoop = window.setInterval("upkeep()", 15);
@@ -18,6 +19,15 @@ function upkeep() {
         drawPlayerAt(posX, posY);
     } else {
         drawExplosion();
+        if (eFc >= 25) {
+            eFc = 0;
+            planets = getPlanets();
+            collided = false;
+            posX = 500;
+            posY = 400;
+            vX = 1;
+            vY = -1;
+        }
     }
     // background();
 }

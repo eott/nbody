@@ -1,5 +1,3 @@
-var eFc = 0;
-
 function circle(x, y, radius, color, width, fill) {
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
