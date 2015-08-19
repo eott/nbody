@@ -38,3 +38,9 @@ function drawPlanets() {
         circle(planets[i][0], planets[i][1], 20, '#ffffff', 1, true);
     }
 }
+
+function drawMenu() {
+    ctx.font = "100px Lucida Console";
+    ctx.fillStyle = "rgba(255,255,255," + 0.1*fc/120 + ")";
+    ctx.fillText("n-body", 300, 200);
+}

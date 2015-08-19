@@ -38,6 +38,10 @@ function getPlanets() {
 registerListeners();
 window.setInterval(function() {
     fc++;
+    if (fc < 120) {
+        drawMenu();
+        return;
+    }
     if (!planets) {
         planets = getPlanets();
     }
