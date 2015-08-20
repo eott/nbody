@@ -42,5 +42,11 @@ function drawPlanets() {
 function drawMenu() {
     ctx.font = "100px Lucida Console";
     ctx.fillStyle = "rgba(255,255,255," + 0.1*fc/120 + ")";
-    ctx.fillText("n-body", 300, 200);
+    ctx.fillText("nbody", 330, 200);
+    ctx.font = "30px Lucida Console";
+    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc-120)/120 + ")";
+    ctx.fillText("hit any key to reverse gravity", 200, 350);
+    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc-240)/120 + ")";
+    ctx.fillText("collect enough asteroids", 250, 500);
+    ctx.fillText("to grow and advance", 290, 550);
 }

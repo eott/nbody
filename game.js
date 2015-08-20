@@ -38,7 +38,7 @@ function getPlanets() {
 registerListeners();
 window.setInterval(function() {
     fc++;
-    if (fc < 120) {
+    if (fc < 550) {
         drawMenu();
         return;
     }
