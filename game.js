@@ -16,10 +16,10 @@ var keyStatus = 0; // Status of input key. 0 = not pressed, 1 = pressed, but not
                    // handled yet, 2 = held down and handled
 
 // Movement
-var posX = 500; // x-position of player
-var posY = 400; // y-position of player
-var vX = 1; // x-velocity of player
-var vY = -1; // y-velocity of player
+var posX; // x-position of player
+var posY; // y-position of player
+var vX; // x-velocity of player
+var vY; // y-velocity of player
 var g = -3000; // Gravitational constant
 
 function getPlanets() {
@@ -33,6 +33,15 @@ function getPlanets() {
     }
     return a;
 }
+
+
+function reset() {
+    posX = 500;
+    posY = 400;
+    vX = 3*(Math.random()-1);
+    vY = 3*(Math.random()-1);
+}
+reset();
 
 // Now, init the game and kick off the game loop with close to 60fps
 registerListeners();
@@ -56,10 +65,7 @@ window.setInterval(function() {
             eFc = 0;
             planets = getPlanets();
             collided = false;
-            posX = 500;
-            posY = 400;
-            vX = 1;
-            vY = -1;
+            reset();
         }
     }
     // background();
