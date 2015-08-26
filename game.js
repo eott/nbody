@@ -47,6 +47,8 @@ reset();
 
 // Now, init the game and kick off the game loop with close to 60fps
 registerListeners();
+backgroundMusic();
+
 window.setInterval(function() {
     fc++;
     if (fc < 550) {
@@ -70,5 +72,4 @@ window.setInterval(function() {
             reset();
         }
     }
-    // background();
 }, 15);

@@ -1,14 +1,25 @@
-function background() {
-    if (audio && !audio.ended) {
-        return;
-    } else {
-        if (!nextAudio) {
-            nextAudio = getAudio();
-        }
-        audio = nextAudio;
-        audio.play();
-        nextAudio = getAudio();
-    }
+function backgroundMusic() {
+    // if (audio && !audio.ended) {
+    //     return;
+    // } else {
+    //     if (!nextAudio) {
+    //         nextAudio = getAudio();
+    //     }
+    //     audio = nextAudio;
+    //     audio.play();
+    //     nextAudio = getAudio();
+    // }
+
+    // Initialize music generation (player).
+    var player = new CPlayer();
+    player.init(song);
+    player.generate();
+
+    // Put the generated song in an Audio element.
+    var wave = player.createWave();
+    var audio = new Audio();
+    audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
+    audio.play();
 }
 
 function getAudio()
