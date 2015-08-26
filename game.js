@@ -5,6 +5,19 @@ var fc = 0; // Frame counter, simply counting upward
 var eFc = 0; // Explosion frame counter
 var collided = false; // If the player has collided
 
+// Scaling
+can.width = window.innerWidth - 5;
+can.height = window.innerHeight - 5;
+var scaleX = 800 / can.width; // Scale of game; 2 means double the viewing field and all coords
+var scaleY = 600 / can.height; // are now half as what they originally were
+console.log(window.innerWidth + " " + window.innerHeight);
+console.log(scaleX + " " + scaleY);
+if (scaleX > 1 || scaleY > 1) {
+    ctx.scale(1/scaleX, 1/scaleY);
+} else {
+    scaleX, scaleY = 1;
+}
+
 // Audio
 var mi = 0; // Music index in seconds; Is used to generate the music continously
 var audio; // The currently playing audio object

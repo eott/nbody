@@ -12,7 +12,7 @@ function circle(x, y, radius, color, width, fill) {
 }
 
 function drawBackground() {
-    ctx.clearRect(0, 0, can.width, can.height);
+    ctx.clearRect(0, 0, scaleX * can.width, scaleY * can.height);
 }
 
 function drawExplosion() {
