@@ -39,6 +39,10 @@ function drawPlanets() {
     }
 }
 
+function drawAsteroidAt(x, y) {
+    circle(x, y, 3, '#ffffff', 1, true);
+}
+
 function drawMenu() {
     ctx.font = "100px Lucida Console";
     ctx.fillStyle = "rgba(255,255,255," + 0.1*fc/120 + ")";

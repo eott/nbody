@@ -2,11 +2,13 @@ function doMovement() {
     var dx = 0;
     var dy = 0;
 
+    // Switch gravity
     if (keyStatus == 1) {
         keyStatus = 2;
         g *= -1;
     }
 
+    // Move player by planet gravity; Newton rules!
     for (var i = 0; i < planets.length; i++) {
         var dX = posX - planets[i][0];
         var dY = posY - planets[i][1];
@@ -23,4 +25,13 @@ function doMovement() {
 
     posX += vX;
     posY += vY;
+
+    // Asteroids orbit their planet and their position is entirely
+    // determined by the orbit parameters and the current time (fc)
+    for (var i = 0; i < planets.length; i++) {
+        var period = 2 * Math.PI * ((fc % 60) / 60);
+        ax = planets[i][3] * Math.sin(period);
+        ay = planets[i][3] * Math.cos(period);
+        drawAsteroidAt(planets[i][0] + ax, planets[i][1] + ay);
+    }
 }

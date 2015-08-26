@@ -20,6 +20,7 @@ var posX; // x-position of player
 var posY; // y-position of player
 var vX; // x-velocity of player
 var vY; // y-velocity of player
+
 var g = -3000; // Gravitational constant
 
 function getPlanets() {
@@ -28,7 +29,8 @@ function getPlanets() {
         a[i] = [
             Math.round(50 + 950 * Math.random()),
             Math.round(50 + 950 * Math.random()),
-            0.1 + 0.9 * Math.random()
+            0.1 + 0.9 * Math.random(),
+            Math.round(50 + 25 * Math.random()),
         ]
     }
     return a;
