@@ -12,10 +12,13 @@ var scaleX = 800 / can.width; // Scale of game; 2 means double the viewing field
 var scaleY = 600 / can.height; // are now half as what they originally were
 console.log(window.innerWidth + " " + window.innerHeight);
 console.log(scaleX + " " + scaleY);
+scaleX = Math.max(scaleX, scaleY);
+scaleY = Math.max(scaleX, scaleY);
 if (scaleX > 1 || scaleY > 1) {
     ctx.scale(1/scaleX, 1/scaleY);
 } else {
-    scaleX, scaleY = 1;
+    scaleX = 1;
+    scaleY = 1;
 }
 
 // Audio
