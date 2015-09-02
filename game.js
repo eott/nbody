@@ -8,18 +8,12 @@ var collided = false; // If the player has collided
 // Scaling
 can.width = window.innerWidth - 5;
 can.height = window.innerHeight - 5;
-var scaleX = 800 / can.width; // Scale of game; 2 means double the viewing field and all coords
-var scaleY = 600 / can.height; // are now half as what they originally were
-console.log(window.innerWidth + " " + window.innerHeight);
-console.log(scaleX + " " + scaleY);
-scaleX = Math.max(scaleX, scaleY);
-scaleY = Math.max(scaleX, scaleY);
-if (scaleX > 1 || scaleY > 1) {
-    ctx.scale(1/scaleX, 1/scaleY);
-} else {
-    scaleX = 1;
-    scaleY = 1;
-}
+scaleX = Math.max(1, 1000 / can.width);
+scaleY = Math.max(1, 800 / can.height);
+shiftX = Math.max(0.5 * (can.width - 1000));
+shiftY = Math.max(0.5 * (can.height - 800));
+ctx.scale(1 / scaleX, 1 / scaleY);
+ctx.translate(shiftX, shiftY);
 
 // Audio
 var mi = 0; // Music index in seconds; Is used to generate the music continously
@@ -64,6 +58,7 @@ function getPlanets() {
             [
                 Math.round(60 + 25 * Math.random()),
                 Math.round(100 + 50 * (Math.random() - 1)),
+                true,
             ],
         ]
     }
