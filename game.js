@@ -2,10 +2,16 @@
 var can = document.getElementById("screen"); // The canvas element
 var ctx = can.getContext("2d"); // The 2D draw context
 var fc = 0; // Frame counter, simply counting upward
-var eFc = 0; // Explosion frame counter
-var collided = false; // If the player has collided
+var eFc = 0; // Explosion frame counter; When it reaches a certain threshold
+             // the death animation is over
+var collided = false; // If the player has collided and the death animation
+                      // needs to be displayed
+var levelCounter = 0; // The current level
+var score = 0; // Score of current level
+var winScore = 0; // Score necessary to beat current level
+var gameState;
 
-// Scaling
+// Scaling and centering
 can.width = window.innerWidth - 5;
 can.height = window.innerHeight - 5;
 scaleX = Math.max(1, 1000 / can.width);
@@ -72,6 +78,27 @@ function getPlanets() {
     return a;
 }
 
+function nextLevel() {
+    switch (levelCounter) {
+        case 0:
+            planets = [[400,300,0.5,[50,120,true,0,0,false]]];
+            positions = [400,200,5,0];
+            break;
+        default:
+            planets = getPlanets();
+            positions = [0,0,0,0];
+            break;
+    }
+    score = 0;
+    winScore = 0;
+    for (var i = 0; i < planets.length; i++) {
+        winScore += (planets[i][3][2] ? 1 : 0) + (planets[i][3][5] ? 1 : 0);
+    }
+    posX = positions[0];
+    posY = positions[1];
+    vX = positions[2];
+    vY = positions[3];
+}
 
 function reset() {
     posX = 500;
@@ -92,20 +119,22 @@ window.setInterval(function() {
         return;
     }
     if (!planets) {
-        planets = getPlanets();
+        nextLevel();
     }
     drawBackground();
     drawPlanets();
     if (!collided) {
         doMovement();
         drawPlayerAt(posX, posY);
+        if (score >= winScore) {
+            gameState = 1;
+        }
     } else {
         drawExplosion();
         if (eFc >= 25) {
             eFc = 0;
-            planets = getPlanets();
+            nextLevel();
             collided = false;
-            reset();
         }
     }
 }, 15);
