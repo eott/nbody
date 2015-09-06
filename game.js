@@ -110,19 +110,12 @@ function collided() {
     fc[1] = 0;
 }
 
-// Now, init the game and kick off the game loop with close to 60fps
-registerListeners();
-backgroundMusic();
-
-window.setInterval(function() {
+function gameLoop() {
     fc[0]++;
-    if (fc[0] < 550) {
-        drawMenu();
-        return;
-    }
 
     switch (gameState) {
         case 0:
+            registerListeners();
             nextLevel();
             gameState = 1;
             break;
@@ -160,4 +153,4 @@ window.setInterval(function() {
             gameState = 1;
             break;
     }
-}, 15);
+}

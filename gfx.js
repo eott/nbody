@@ -39,15 +39,3 @@ function drawPlanets() {
 function drawAsteroidAt(x, y) {
     circle(x, y, 3, '#ffffff', 1, true);
 }
-
-function drawMenu() {
-    ctx.font = "100px Lucida Console";
-    ctx.fillStyle = "rgba(255,255,255," + 0.1*fc[0]/120 + ")";
-    ctx.fillText("nbody", 330, 200);
-    ctx.font = "30px Lucida Console";
-    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc[0]-120)/120 + ")";
-    ctx.fillText("hit any key to reverse gravity", 200, 350);
-    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc[0]-240)/120 + ")";
-    ctx.fillText("collect enough asteroids", 250, 500);
-    ctx.fillText("to grow and advance", 290, 550);
-}
