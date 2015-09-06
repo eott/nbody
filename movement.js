@@ -29,13 +29,15 @@ function doMovement() {
     // Asteroids orbit their planet and their position is entirely
     // determined by the orbit parameters and the current time (fc)
     for (var i = 0; i < planets.length; i++) {
-        if (planets[i][3][2]) {
-            var period = 2 * Math.PI * ((fc % planets[i][3][1]) / planets[i][3][1]);
-            ax = planets[i][0] + planets[i][3][0] * Math.sin(period);
-            ay = planets[i][1] + planets[i][3][0] * Math.cos(period);
-            drawAsteroidAt(ax, ay);
-            if (Math.sqrt((posX - ax) * (posX - ax) + (posY - ay) * (posY - ay)) < 30) {
-                planets[i][3][2] = false;
+        for (var k = 0; k < 4; k += 3) {
+            if (planets[i][3][2+k]) {
+                var period = 2 * Math.PI * ((fc % planets[i][3][1+k]) / planets[i][3][1+k]);
+                ax = planets[i][0] + planets[i][3][0+k] * Math.sin(period);
+                ay = planets[i][1] + planets[i][3][0+k] * Math.cos(period);
+                drawAsteroidAt(ax, ay);
+                if (Math.sqrt((posX - ax) * (posX - ax) + (posY - ay) * (posY - ay)) < 30) {
+                    planets[i][3][2+k] = false;
+                }
             }
         }
     }

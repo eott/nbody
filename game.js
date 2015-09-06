@@ -42,9 +42,13 @@ var planets; // The planets; see getPlanets for structure
  *     0 => int, The planet x position
  *     1 => int, The planet y position
  *     2 => float, The planet gravity, normalized to 1
- *     3 => array [ The asteroids of the planet with the structur:
- *         0 => int, The asteroid distance from the planet center
- *         1 => int, The asteroid orbital period in frames
+ *     3 => array [ The asteroids of the planet with the structure:
+ *         0 => int, The first asteroid distance from the planet center
+ *         1 => int, The first asteroid orbital period in frames
+ *         2 => boolean, If the first asteroid is active or not
+ *         3 => int, The second asteroid distance from the planet center
+ *         4 => int, The second asteroid orbital period in frames
+ *         5 => boolean, If the second asteroid is active or not
  *     ]
  * ]
  */
@@ -59,6 +63,9 @@ function getPlanets() {
                 Math.round(60 + 25 * Math.random()),
                 Math.round(100 + 50 * (Math.random() - 1)),
                 true,
+                Math.round(60 + 25 * Math.random()),
+                Math.round(100 + 50 * (Math.random() - 1)),
+                (Math.random() > 0.5),
             ],
         ]
     }
