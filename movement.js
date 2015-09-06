@@ -43,3 +43,7 @@ function doMovement() {
         }
     }
 }
+
+function checkBounds() {
+    return posX < -2000 || posX > 2800 || posY < -1500 || posY > 2100;
+}

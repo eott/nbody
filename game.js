@@ -102,6 +102,7 @@ function nextLevel() {
     posY = positions[1];
     vX = positions[2];
     vY = positions[3];
+    g = -Math.abs(g);
 }
 
 function collided() {
@@ -133,11 +134,17 @@ window.setInterval(function() {
             drawPlayerAt(posX, posY);
             if (score >= winScore) {
                 gameState = 3;
+            } else if (checkBounds()) {
+                gameState = 2;
+                fc[1] = 26; // We cheat a bit so no explosion is drawn when player
+                            // leaves the bounds
             }
             break;
 
         case 2:
             if (fc[1] <= 25) {
+                drawBackground();
+                drawPlanets();
                 drawExplosion();
                 fc[1]++;
             } else {
