@@ -1,15 +1,19 @@
 // Game and meta globals
 var can = document.getElementById("screen"); // The canvas element
 var ctx = can.getContext("2d"); // The 2D draw context
-var fc = 0; // Frame counter, simply counting upward
-var eFc = 0; // Explosion frame counter; When it reaches a certain threshold
-             // the death animation is over
-var collided = false; // If the player has collided and the death animation
-                      // needs to be displayed
 var levelCounter = 0; // The current level
 var score = 0; // Score of current level
 var winScore = 0; // Score necessary to beat current level
-var gameState;
+var gameState = 0; // The current game state:
+                   // 0 means the game is unitilazied
+                   // 1 means the game is running a level normally
+                   // 2 means the level was lost
+                   // 3 means the level was won
+var fc = [0,0,0,0]; // Frame counters, they simply count upward once a frame
+                    // 0 => main fc, since the start of the game
+                    // 1 => fc used in drawing the explosion
+                    // 2 => fc since the death animation ended and the level was lost
+                    // 3 => fc since the required score was achieved and the level was won
 
 // Scaling and centering
 can.width = window.innerWidth - 5;
@@ -100,41 +104,53 @@ function nextLevel() {
     vY = positions[3];
 }
 
-function reset() {
-    posX = 500;
-    posY = 400;
-    vX = 3*(Math.random()-1);
-    vY = 3*(Math.random()-1);
+function collided() {
+    gameState = 2;
+    fc[1] = 0;
 }
-reset();
 
 // Now, init the game and kick off the game loop with close to 60fps
 registerListeners();
 backgroundMusic();
 
 window.setInterval(function() {
-    fc++;
-    if (fc < 550) {
+    fc[0]++;
+    if (fc[0] < 550) {
         drawMenu();
         return;
     }
-    if (!planets) {
-        nextLevel();
-    }
-    drawBackground();
-    drawPlanets();
-    if (!collided) {
-        doMovement();
-        drawPlayerAt(posX, posY);
-        if (score >= winScore) {
-            gameState = 1;
-        }
-    } else {
-        drawExplosion();
-        if (eFc >= 25) {
-            eFc = 0;
+
+    switch (gameState) {
+        case 0:
             nextLevel();
-            collided = false;
-        }
+            gameState = 1;
+            break;
+
+        case 1:
+            drawBackground();
+            drawPlanets();
+            doMovement();
+            drawPlayerAt(posX, posY);
+            if (score >= winScore) {
+                gameState = 3;
+            }
+            break;
+
+        case 2:
+            if (fc[1] <= 25) {
+                drawExplosion();
+                fc[1]++;
+            } else {
+                fc[1] = 0;
+                nextLevel();
+                gameState = 1;
+            }
+            break;
+
+        case 3:
+            levelCounter++;
+            nextLevel();
+            gameState = 1;
+            break;
     }
 }, 15);

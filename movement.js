@@ -18,7 +18,7 @@ function doMovement() {
         vY += s * Math.sin(0.5 * Math.PI * (dY/r));
 
         if (r < 30) {
-            collided = true;
+            collided();
             return;
         }
     }
@@ -27,11 +27,11 @@ function doMovement() {
     posY += vY;
 
     // Asteroids orbit their planet and their position is entirely
-    // determined by the orbit parameters and the current time (fc)
+    // determined by the orbit parameters and the current time (fc[0])
     for (var i = 0; i < planets.length; i++) {
         for (var k = 0; k < 4; k += 3) {
             if (planets[i][3][2+k]) {
-                var period = 2 * Math.PI * ((fc % planets[i][3][1+k]) / planets[i][3][1+k]);
+                var period = 2 * Math.PI * ((fc[0] % planets[i][3][1+k]) / planets[i][3][1+k]);
                 ax = planets[i][0] + planets[i][3][0+k] * Math.sin(period);
                 ay = planets[i][1] + planets[i][3][0+k] * Math.cos(period);
                 drawAsteroidAt(ax, ay);

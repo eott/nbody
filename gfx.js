@@ -16,17 +16,14 @@ function drawBackground() {
 }
 
 function drawExplosion() {
-    if (eFc < 25) {
-        for (var i = 1; i < 13; i+=2) {
-            circle(posX, posY, eFc*i, '#ff0000', 2);
-        }
-        var grad = ctx.createRadialGradient(posX, posY, 0, posX, posY, eFc*3);
-        grad.addColorStop(0, "#ffff00");
-        grad.addColorStop(0.5, "#ff0000");
-        grad.addColorStop(1, "rgba(255,0,0,0.1)");
-        circle(posX, posY, eFc*3, grad, 1, true);
-        eFc++;
+    for (var i = 1; i < 13; i+=2) {
+        circle(posX, posY, fc[1]*i, '#ff0000', 2);
     }
+    var grad = ctx.createRadialGradient(posX, posY, 0, posX, posY, fc[1]*3);
+    grad.addColorStop(0, "#ffff00");
+    grad.addColorStop(0.5, "#ff0000");
+    grad.addColorStop(1, "rgba(255,0,0,0.1)");
+    circle(posX, posY, fc[1]*3, grad, 1, true);
 }
 
 function drawPlayerAt(x, y) {
@@ -45,12 +42,12 @@ function drawAsteroidAt(x, y) {
 
 function drawMenu() {
     ctx.font = "100px Lucida Console";
-    ctx.fillStyle = "rgba(255,255,255," + 0.1*fc/120 + ")";
+    ctx.fillStyle = "rgba(255,255,255," + 0.1*fc[0]/120 + ")";
     ctx.fillText("nbody", 330, 200);
     ctx.font = "30px Lucida Console";
-    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc-120)/120 + ")";
+    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc[0]-120)/120 + ")";
     ctx.fillText("hit any key to reverse gravity", 200, 350);
-    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc-240)/120 + ")";
+    ctx.fillStyle = "rgba(255,255,255," + 0.1*(fc[0]-240)/120 + ")";
     ctx.fillText("collect enough asteroids", 250, 500);
     ctx.fillText("to grow and advance", 290, 550);
 }
