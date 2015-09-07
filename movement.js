@@ -26,6 +26,13 @@ function doMovement() {
     posX += vX;
     posY += vY;
 
+    hist[hindex] = [];
+    hist[hindex][0] = posX;
+    hist[hindex][1] = posY;
+    hist[hindex][2] = vX;
+    hist[hindex][3] = vY;
+    hindex = (hindex + 1) % 100;
+
     // Asteroids orbit their planet and their position is entirely
     // determined by the orbit parameters and the current time (fc[0])
     for (var i = 0; i < planets.length; i++) {

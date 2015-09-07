@@ -28,6 +28,17 @@ function drawExplosion() {
 
 function drawPlayerAt(x, y) {
     circle(x, y, 10, '#dddddd', 1, true);
+    ctx.beginPath();
+    ctx.strokeStyle = '#ffffff';
+    var ix = (100 + (hindex - 1)) % 100;
+    ctx.moveTo(hist[ix][0], hist[ix][1]);
+    for (var i = 1; i < 100; i++) {
+        ix = (100 + (hindex - i)) % 100;
+        if (hist[ix]) {
+            ctx.lineTo(hist[ix][0], hist[ix][1]);
+        }
+    }
+    ctx.stroke();
 }
 
 function drawPlanets() {
