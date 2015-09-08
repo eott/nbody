@@ -2,12 +2,6 @@ function doMovement() {
     var dx = 0;
     var dy = 0;
 
-    // Switch gravity
-    if (keyStatus == 1) {
-        keyStatus = 2;
-        g *= -1;
-    }
-
     // Move player by planet gravity; Newton rules!
     for (var i = 0; i < planets.length; i++) {
         var dX = posX - planets[i][0];
@@ -31,7 +25,7 @@ function doMovement() {
     hist[hindex][1] = posY;
     hist[hindex][2] = vX;
     hist[hindex][3] = vY;
-    hindex = (hindex + 1) % 100;
+    hindex = (hindex + 1) % 200;
 
     // Asteroids orbit their planet and their position is entirely
     // determined by the orbit parameters and the current time (fc[0])
