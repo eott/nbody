@@ -1,3 +1,38 @@
+History = function(n) {
+    this.h = [];
+    for (var i = 0; i < 2*n; i++) {
+        this.h[n] = [];
+    }
+    this.n = n;
+    this.li = 0;
+    this.hi = -1;
+}
+
+History.prototype.add = function(x, y, vx, vy) {
+    this.hi++;
+    if (this.hi >= this.n) {
+        this.li++;
+    }
+    this.h[this.hi] = [x, y, vx, vy];
+    if (this.hi == (2 * this.n - 1)) {
+        this.h = this.h.splice(this.n, this.n);
+        this.hi = this.n - 1;
+        this.li = 0;
+    }
+}
+
+History.prototype.backIter = function(f) {
+    for (var i = this.hi; i >= this.li; i--) {
+        f(this.h[i]);
+    }
+}
+
+History.prototype.reset = function() {
+    this.h = [];
+    this.li = 0;
+    this.hi = -1;
+}
+
 function doMovement() {
     var dx = 0;
     var dy = 0;
@@ -20,12 +55,7 @@ function doMovement() {
     posX += vX;
     posY += vY;
 
-    hist[hindex] = [];
-    hist[hindex][0] = posX;
-    hist[hindex][1] = posY;
-    hist[hindex][2] = vX;
-    hist[hindex][3] = vY;
-    hindex = (hindex + 1) % 200;
+    hist.add(posX, posY, vX, vY);
 
     // Asteroids orbit their planet and their position is entirely
     // determined by the orbit parameters and the current time (fc[0])

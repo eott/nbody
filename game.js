@@ -41,8 +41,7 @@ var posX; // x-position of player
 var posY; // y-position of player
 var vX; // x-velocity of player
 var vY; // y-velocity of player
-var hist = []; // History of positions and velocities
-var hindex = 0; // History index, circles around 100
+var hist = new History(200); // History of positions and velocities
 
 // Game objects and stuff
 var g = -3000; // Gravitational constant
@@ -107,6 +106,7 @@ function nextLevel() {
     vX = positions[2];
     vY = positions[3];
     g = -Math.abs(g);
+    hist.reset();
 }
 
 function collided() {
