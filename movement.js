@@ -33,6 +33,15 @@ History.prototype.reset = function() {
     this.hi = -1;
 }
 
+History.prototype.pop = function() {
+    if (this.hi > this.li) {
+        this.hi--;
+        return this.h[this.hi + 1];
+    } else {
+        return false;
+    }
+}
+
 function doMovement() {
     var dx = 0;
     var dy = 0;
