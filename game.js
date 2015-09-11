@@ -31,7 +31,7 @@ var audio; // The currently playing audio object
 var nextAudio; // The next precalculated audio object
 
 // Input
-var keyStatus = []; // Status of input keys. 0 is space, 2 is escape, 1 is everything else
+var keyStatus = [0,0,0]; // Status of input keys. 0 is space, 2 is escape, 1 is everything else
                     // 0 = not pressed,
                     // 1 = pressed, but not handled yet,
                     // 2 = held down and handled

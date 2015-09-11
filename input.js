@@ -1,6 +1,8 @@
 function keyEvent(type, key) {
     if (key == 32) {
-        keyStatus[0] = type;
+        if ((type == 1 && keyStatus[0] == 0) || (type == 0)) {
+            keyStatus[0] = type;
+        }
     } else if (key == 27) {
         keyStatus[2] = type;
     } else {

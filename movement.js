@@ -10,13 +10,13 @@ History = function(n) {
 
 History.prototype.add = function(x, y, vx, vy) {
     this.hi++;
-    if (this.hi >= this.n) {
+    if (this.hi - this.li >= this.n) {
         this.li++;
     }
     this.h[this.hi] = [x, y, vx, vy];
-    if (this.hi == (2 * this.n - 1)) {
-        this.h = this.h.splice(this.n, this.n);
-        this.hi = this.n - 1;
+    if (this.hi >= (2 * this.n - 1)) {
+        this.h = this.h.splice(this.li, this.hi-this.li);
+        this.hi = this.hi - this.li - 1;
         this.li = 0;
     }
 }
@@ -61,10 +61,27 @@ function doMovement() {
         }
     }
 
-    posX += vX;
-    posY += vY;
+    // If space is held, pop positions from the history instead
+    // of advancing. Where we're going, we don't need roads!
+    var pos = false;
+    if (keyStatus[0] == 1) {
+        pos = hist.pop();
+        if (pos) {
+            posX = pos[0];
+            posY = pos[1];
+            vX = pos[2];
+            vY = pos[3];
+        } else {
+            keyStatus[0] = 2; // Force release of spacebar
+        }
+    }
 
-    hist.add(posX, posY, vX, vY);
+    // Update positions when newly calculated
+    if (!pos) {
+        posX += vX;
+        posY += vY;
+        hist.add(posX, posY, vX, vY);
+    }
 
     // Asteroids orbit their planet and their position is entirely
     // determined by the orbit parameters and the current time (fc[0])
