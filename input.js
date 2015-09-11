@@ -21,4 +21,9 @@ function inputUpdate() {
         keyStatus[1] = 2;
         g *= -1;
     }
+
+    if (keyStatus[2] == 1) {
+        keyStatus[2] = 2;
+        toggleGame();
+    }
 }

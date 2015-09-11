@@ -21,6 +21,8 @@
             }
             span {
                 font-size: 25px;
+            }
+            span[onClick] {
                 cursor: pointer;
             }
         </style>
@@ -31,13 +33,26 @@
             nbody
             <br>
             <br>
-            <span onClick="startGame();">Start game</span>
+            <span onClick="toggleGame();">Start game</span>
             <br>
-            <span>How to play</span>
+            <span onClick="toggleTutorial();">How to play</span>
             <br>
             <span>Save game</span>
         </div>
-        <canvas id="screen" width="100" height="100"></canvas>
+        <div id="tutorial" style="display: none;">
+            Collect the asteroids orbiting the planets,<br>
+            while avoiding crashing into them or<br>
+            flying off into space.
+            <br>
+            <br>
+            <span>Controls:</span><br>
+            <span>Hold space - Reverse movement</span><br>
+            <span>Escape - Goto menu</span><br>
+            <span>Any other key - Reverse gravity</span><br>
+            <br>
+            <span onClick="toggleTutorial();">Back to menu</span><br>
+        </div>
+        <canvas id="screen" width="100" height="100" style="display: none;"></canvas>
 
         <script src="input.js" type="text/javascript"></script>
         <script src="gfx.js" type="text/javascript"></script>
@@ -50,9 +65,29 @@
         <script type="text/javascript">
             backgroundMusic();
 
-            function startGame() {
-                window.setInterval('gameLoop()', 15);
-                document.getElementById('menu').style = "display: none;"
+            var isTutorial = false;
+            var isMenu = true;
+            var loop;
+
+            function $(id) {
+                return document.getElementById(id);
+            }
+
+            function toggleGame() {
+                isMenu = !isMenu;
+                if (!isMenu) {
+                    loop = window.setInterval('gameLoop()', 15);
+                } else {
+                    window.clearInterval(loop);
+                }
+                $('menu').style = "display: " + (isMenu ? "block;" : "none;");
+                $('screen').style = "display: " + (!isMenu ? "block;" : "none;");
+            }
+
+            function toggleTutorial() {
+                isTutorial = !isTutorial;
+                $('tutorial').style = "display: " + (isTutorial ? "block;" : "none;");
+                $('menu').style = "display: " + (!isTutorial ? "block;" : "none;");
             }
         </script>
     </body>
