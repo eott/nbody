@@ -84,6 +84,14 @@ function getPlanets() {
 function level(next) {
     switch (levelCounter) {
         case 0:
+            planets = [[400,300,0.5,[100,500,true,0,0,false]]];
+            positions = [400,200,-5,0];
+            break;
+        case 1:
+            planets = [[400,200,0.5,[85,150,true,80,40,true]],[400,400,0.5,[85,70,true,90,100,true]]];
+            positions = [100,300,3,0];
+            break;
+        case 2:
             planets = [[400,300,0.5,[50,120,true,0,0,false]]];
             positions = [400,200,5,0];
             break;
