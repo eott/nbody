@@ -8,6 +8,7 @@ function initMusic() {
         var player = new CPlayer();
         player.init(i == 0 ? song : (i == 1 ? explosion : pickup));
         player.generate();
+        player.generate();
 
         // Put the generated song in an Audio element.
         var wave = player.createWave();
@@ -17,7 +18,7 @@ function initMusic() {
         // And kick it off, if background music
         if (i == 0) {
             audio[i].loop = true;
-            audio[i].volume = 0.3;
+            audio[i].volume = 0.5;
             audio[i].play();
         }
     }
@@ -26,6 +27,6 @@ function initMusic() {
 function mute() {
     muted = !muted;
     for (var i = 0; i < audio.length; i++) {
-        audio[i].volume = muted ? 0 : (i == 0 ? 0.3 : 0.5);
+        audio[i].volume = muted ? 0 : (i == 0 ? 0.5 : 1.0);
     }
 }
