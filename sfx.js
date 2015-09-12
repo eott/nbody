@@ -1,5 +1,6 @@
 // A list of audio objects; 0 is background music, 1 is explosion, 2 is pickup
 var audio = [];
+var muted = false;
 
 function initMusic() {
     for (var i = 0; i < 3; i++) {
@@ -19,5 +20,12 @@ function initMusic() {
             audio[i].volume = 0.3;
             audio[i].play();
         }
+    }
+}
+
+function mute() {
+    muted = !muted;
+    for (var i = 0; i < audio.length; i++) {
+        audio[i].volume = muted ? 0 : (i == 0 ? 0.3 : 0.5);
     }
 }
