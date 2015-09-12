@@ -41,14 +41,22 @@ function drawPlanets() {
     for (var i = 0; i < planets.length; i++) {
         // Draw aura
         var grad = ctx.createRadialGradient(planets[i][0], planets[i][1], 0, planets[i][0], planets[i][1], 200);
-        grad.addColorStop(0, "rgba(255,0,0,0.5)");
-        grad.addColorStop(1, "rgba(255,0,0,0.0)");
+        grad.addColorStop(0, planetColor(planets[i], 1.0, 1.0));
+        grad.addColorStop(1, planetColor(planets[i], 0.0, 1.0));
         circle(planets[i][0], planets[i][1], 200, grad, 1, true);
         // Draw planet body
-        circle(planets[i][0], planets[i][1], 15 + 15 * planets[i][2], '#ffffff', 1, true);
+        circle(planets[i][0], planets[i][1], 10 + 20 * planets[i][2], planetColor(planets[i], 1.0, 1.5), 1, true);
     }
 }
 
 function drawAsteroidAt(x, y) {
     circle(x, y, 3, '#ffffff', 1, true);
+}
+
+function planetColor(p, op, f) {
+    return "rgba("
+        + o(Math.min(255, f * 255 * p[2])) + ','
+        + o(Math.min(255, f * 0.6 * 255 * p[2])) + ','
+        + o(Math.min(255, f * 0.3 * 255 * p[2])) + ','
+        + op + ')';
 }
