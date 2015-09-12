@@ -46,6 +46,7 @@ var hist = new History(200); // History of positions and velocities
 // Game objects and stuff
 var g = -3000; // Gravitational constant
 var planets; // The planets; see getPlanets for structure
+var resetPlanets; // Used in reseting the level without triggering recalculation
 
 /**
  * Generated the planets, asteroids and other game objects for a level. The return
@@ -85,14 +86,17 @@ function getPlanets() {
     return a;
 }
 
-function nextLevel() {
+function level(next) {
     switch (levelCounter) {
         case 0:
             planets = [[400,300,0.5,[50,120,true,0,0,false]]];
             positions = [400,200,5,0];
             break;
         default:
-            planets = getPlanets();
+            if (next) {
+                resetPlanets = getPlanets();
+            }
+            planets = clone(resetPlanets);
             positions = [0,0,0,0];
             break;
     }
@@ -121,7 +125,7 @@ function gameLoop() {
     switch (gameState) {
         case 0:
             registerListeners();
-            nextLevel();
+            level(true);
             gameState = 1;
             break;
 
@@ -147,15 +151,28 @@ function gameLoop() {
                 fc[1]++;
             } else {
                 fc[1] = 0;
-                nextLevel();
+                level(false);
                 gameState = 1;
             }
             break;
 
         case 3:
             levelCounter++;
-            nextLevel();
+            level(true);
             gameState = 1;
             break;
+    }
+}
+
+function clone(a) {
+    var i, c;
+    if (Array.isArray(a)) {
+        c = a.slice(0);
+        for(i = 0; i < c.length; i++) {
+            c[i] = clone(c[i]);
+        }
+        return c;
+    } else {
+        return a; // Doesn't clone objects
     }
 }
