@@ -5,6 +5,8 @@ function keyEvent(type, key) {
         }
     } else if (key == 27) {
         keyStatus[2] = type;
+    } else if (key == 82 && ((type == 1 && keyStatus[3] == 0) || (type == 0))) {
+        keyStatus[3] = type;
     } else {
         keyStatus[1] = type;
     }
@@ -25,5 +27,10 @@ function inputUpdate() {
     if (keyStatus[2] == 1) {
         keyStatus[2] = 2;
         toggleGame();
+    }
+
+    if (keyStatus[3] == 1) {
+        keyStatus[3] = 2;
+        level(false);
     }
 }
