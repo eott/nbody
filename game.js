@@ -113,6 +113,7 @@ function level(next) {
 function collided() {
     gameState = 2;
     fc[1] = 0;
+    audio[1].play();
 }
 
 function gameLoop() {

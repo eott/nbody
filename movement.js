@@ -96,6 +96,7 @@ function doMovement() {
                     planets[i][3][2+k] = false;
                     score++;
                     $('ast').innerHTML = 'Asteroids ' + score + '/' + winScore;
+                    audio[2].play();
                 }
             }
         }
