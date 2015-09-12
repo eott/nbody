@@ -13,15 +13,20 @@
             }
             div {
                 text-align: center;
-                font-size: 50px;
+                font-size: 18px;
+                line-height: 40px;
                 font-family: 'Lucida Console';
                 color: #fff;
             }
-            span {
-                font-size: 25px;
+            .title {
+                font-size: 80px;
             }
             span[onClick] {
+                font-size: 25px;
                 cursor: pointer;
+            }
+            #menu, #tutorial, #save {
+                margin-top: 100px;
             }
             #hud {
                 position: absolute;
@@ -29,16 +34,18 @@
             }
             #lvl {
                 float: left;
+                padding: 10px;
             }
             #ast {
                 float: right;
+                padding: 10px;
             }
         </style>
     </head>
 
     <body>
         <div id="menu">
-            nbody
+            <span class="title">nbody</span>
             <br>
             <br>
             <span onClick="toggleGame();">Start game</span>
