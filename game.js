@@ -1,5 +1,5 @@
 // Game and meta globals
-var can = document.getElementById("screen"); // The canvas element
+var can = $("screen"); // The canvas element
 var ctx = can.getContext("2d"); // The 2D draw context
 var levelCounter = 0; // The current level
 var score = 0; // Score of current level
@@ -111,6 +111,8 @@ function level(next) {
     vY = positions[3];
     g = -Math.abs(g);
     hist.reset();
+    $('lvl').innerHTML = 'Level ' + (levelCounter + 1);
+    $('ast').innerHTML = 'Asteroids ' + score + '/' + winScore;
 }
 
 function collided() {

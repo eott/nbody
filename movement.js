@@ -95,6 +95,7 @@ function doMovement() {
                 if (Math.sqrt((posX - ax) * (posX - ax) + (posY - ay) * (posY - ay)) < 30) {
                     planets[i][3][2+k] = false;
                     score++;
+                    $('ast').innerHTML = 'Asteroids ' + score + '/' + winScore;
                 }
             }
         }
