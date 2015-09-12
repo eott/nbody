@@ -73,10 +73,11 @@ function drawAsteroidAt(x, y) {
 }
 
 function planetColor(p, op, f) {
+    pl = g < 0 ? [1.0, 0.6, 0.3] : [0.3, 1.0, 0.6];
     return "rgba("
-        + o(Math.min(255, f * 255 * p[2])) + ','
-        + o(Math.min(255, f * 0.6 * 255 * p[2])) + ','
-        + o(Math.min(255, f * 0.3 * 255 * p[2])) + ','
+        + o(Math.min(255, f * pl[0] * 255 * p[2])) + ','
+        + o(Math.min(255, f * pl[1] * 255 * p[2])) + ','
+        + o(Math.min(255, f * pl[2] * 255 * p[2])) + ','
         + op + ')';
 }
 
