@@ -27,14 +27,22 @@ function drawExplosion() {
 }
 
 function drawPlayerAt(x, y) {
-    circle(x, y, 10, '#dddddd', 1, true);
+    // Draw tail
     ctx.beginPath();
-    ctx.strokeStyle = '#ffffff';
+    ctx.strokeStyle = '#696BFF';
     ctx.moveTo(posX, posY);
     hist.backIter(function(d) {
         ctx.lineTo(d[0], d[1]);
     });
     ctx.stroke();
+    // Draw aura
+    var grad = ctx.createRadialGradient(posX, posY, 0, posX, posY, 50);
+    grad.addColorStop(0, 'rgba(54,57,255,0.3)');
+    grad.addColorStop(1, 'rgba(54,57,255,0.0)');
+    circle(posX, posY, 50, grad, 1, true);
+    // Draw body
+    rr(posX, posY, 10, 'rgba(54,57,255,1.0)', pi * (fc[0] % 30) / 30);
+    rr(posX, posY, 10, 'rgba(54,57,255,1.0)', -pi * (fc[0] % 30) / 30);
 }
 
 function drawPlanets() {
@@ -59,4 +67,43 @@ function planetColor(p, op, f) {
         + o(Math.min(255, f * 0.6 * 255 * p[2])) + ','
         + o(Math.min(255, f * 0.3 * 255 * p[2])) + ','
         + op + ')';
+}
+
+function rr(x, y, l, c, r) {
+    ctx.fillStyle = c;
+    ctx.translate(x, y);
+    ctx.rotate(r);
+    ctx.fillRect(-0.5*l, -0.5*l, l, l);
+    console.log(x, y, l);
+    ctx.rotate(-r);
+    ctx.translate(-x, -y);
+
+    // For an unfilled rectangle, something slight dfferent:
+    //
+    // ctx.beginPath();
+    // ctx.strokeStyle = c;
+    // for (var i=0; i < 4; i++) {
+    //     var sr = 1;//sin(r);
+    //     var cr = 1;//cos(r);
+    //     switch (i) {
+    //         case 0:
+    //             ctx.moveTo(x - 0.5 * l * sr, y - 0.5 * l * cr);
+    //             // console.log(x - 0.5 * l * sr, y - 0.5 * l * cr);
+    //             break;
+    //         case 1:
+    //             ctx.lineTo(x + 0.5 * l * sr, y - 0.5 * l * cr);
+    //             // console.log(x + 0.5 * l * sr, y - 0.5 * l * cr);
+    //             break;
+    //         case 2:
+    //             ctx.lineTo(x + 0.5 * l * sr, y + 0.5 * l * cr);
+    //             // console.log(x + 0.5 * l * sr, y + 0.5 * l * cr);
+    //             break;
+    //         case 3:
+    //             ctx.lineTo(x - 0.5 * l * sr, y + 0.5 * l * cr);
+    //             // console.log(x - 0.5 * l * sr, y + 0.5 * l * cr);
+    //             break;
+    //     }
+    // }
+    // ctx.closePath();
+    // ctx.stroke();
 }

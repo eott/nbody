@@ -47,6 +47,9 @@ var resetPositions; // Used in reseting the level without triggering recalculati
 // Aliases
 var r = Math.random;
 var o = Math.round;
+var sin = Math.sin;
+var cos = Math.cos;
+var pi = Math.PI;
 
 /**
  * Generated the planets, asteroids and other game objects for a level. The return
