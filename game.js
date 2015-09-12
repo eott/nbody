@@ -42,6 +42,11 @@ var hist = new History(200); // History of positions and velocities
 var g = -3000; // Gravitational constant
 var planets; // The planets; see getPlanets for structure
 var resetPlanets; // Used in reseting the level without triggering recalculation
+var resetPositions; // Used in reseting the level without triggering recalculation
+
+// Aliases
+var r = Math.random;
+var o = Math.round;
 
 /**
  * Generated the planets, asteroids and other game objects for a level. The return
@@ -65,8 +70,8 @@ function getPlanets() {
     var a = [];
     for (var i=0; i < Math.round(1 + 2 * Math.random()); i++) {
         a[i] = [
-            Math.round(50 + 950 * Math.random()),
-            Math.round(50 + 950 * Math.random()),
+            Math.round(100 + 600 * Math.random()),
+            Math.round(50 + 500 * Math.random()),
             0.1 + 0.9 * Math.random(),
             [
                 Math.round(60 + 25 * Math.random()),
@@ -79,6 +84,20 @@ function getPlanets() {
         ]
     }
     return a;
+}
+
+function getPositions() {
+    var pos = false;
+    var p = resetPlanets;
+    while (!pos) {
+        pos = [o(100 + 600 * r()), o(50 + 500 * r()), o(1 + 2 * r()), o(1 + 2 * r())]
+        for (var i = 0; i < p.length; i++) {
+            if (pos && Math.abs(p[i][0] - pos[0]) < 100 || Math.abs(p[i][1] - pos[1]) < 100) {
+                pos = false;
+            }
+        }
+    }
+    return pos;
 }
 
 function level(next) {
@@ -98,9 +117,10 @@ function level(next) {
         default:
             if (next) {
                 resetPlanets = getPlanets();
+                resetPositions = getPositions();
             }
             planets = clone(resetPlanets);
-            positions = [0,0,0,0];
+            positions = clone(resetPositions);
             break;
     }
     score = 0;
