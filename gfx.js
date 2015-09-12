@@ -39,7 +39,13 @@ function drawPlayerAt(x, y) {
 
 function drawPlanets() {
     for (var i = 0; i < planets.length; i++) {
-        circle(planets[i][0], planets[i][1], 20, '#ffffff', 1, true);
+        // Draw aura
+        var grad = ctx.createRadialGradient(planets[i][0], planets[i][1], 0, planets[i][0], planets[i][1], 200);
+        grad.addColorStop(0, "rgba(255,0,0,0.5)");
+        grad.addColorStop(1, "rgba(255,0,0,0.0)");
+        circle(planets[i][0], planets[i][1], 200, grad, 1, true);
+        // Draw planet body
+        circle(planets[i][0], planets[i][1], 15 + 15 * planets[i][2], '#ffffff', 1, true);
     }
 }
 
