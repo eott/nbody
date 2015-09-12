@@ -45,7 +45,7 @@
             <br>
             <span onClick="toggleTutorial();">How to play</span>
             <br>
-            <span>Save game</span>
+            <span onClick="toggleSave();">Save game</span>
         </div>
         <div id="tutorial" style="display: none;">
             Collect the asteroids orbiting the planets,<br>
@@ -58,7 +58,12 @@
             <span>Escape - Goto menu</span><br>
             <span>Any other key - Reverse gravity</span><br>
             <br>
-            <span onClick="toggleTutorial();">Back to menu</span><br>
+            <span onClick="toggleTutorial();">Back to menu</span>
+        </div>
+        <div id="save" style="display: none;">
+            Copy this URL and save it to return to the game with your current progress:<br>
+            <span id="url"></span><br><br>
+            <span onClick="toggleSave();">Back to menu</span>
         </div>
         <div id="hud" style="display: none;">
             <span id="lvl"></span>
@@ -72,10 +77,11 @@
         <script src="soundbox-player.js" type="text/javascript"></script>
 
         <script type="text/javascript">
-            backgroundMusic();
+            initMusic();
 
             var isTutorial = false;
             var isMenu = true;
+            var isSave = false;
             var loop;
 
             function $(id) {
@@ -102,6 +108,14 @@
                 isTutorial = !isTutorial;
                 h('tutorial', isTutorial);
                 h('menu', !isTutorial);
+            }
+
+            function toggleSave() {
+                isSave = !isSave;
+                h('save', isSave);
+                h('menu', !isSave);
+                var u = window.location;
+                $('url').innerHTML = u.origin + u.pathname + '?h=' + ((levelCounter * 2352 + 3726) % 10000);
             }
         </script>
 

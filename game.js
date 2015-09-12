@@ -25,11 +25,6 @@ shiftY = Math.max(0.5 * (can.height - 800));
 ctx.scale(1 / scaleX, 1 / scaleY);
 ctx.translate(shiftX, shiftY);
 
-// Audio
-var mi = 0; // Music index in seconds; Is used to generate the music continously
-var audio; // The currently playing audio object
-var nextAudio; // The next precalculated audio object
-
 // Input
 var keyStatus = [0,0,0]; // Status of input keys. 0 is space, 2 is escape, 1 is everything else
                     // 0 = not pressed,
@@ -127,8 +122,23 @@ function gameLoop() {
     switch (gameState) {
         case 0:
             registerListeners();
-            level(true);
             gameState = 1;
+
+            // If there's level hash given, load the level
+            // We don't do any encryption, just a simple obfuscation
+            // to discourage cheating just a little bit
+            var loc = window.location.search;
+            if (loc.search(/h=/) >= 0) {
+                var hash = loc.substr(loc.search(/h=/)+2);
+                for (var i = 0; i <= 1000; i++) { // As if anyone would play this past 1000 levels
+                    var h = (i * 2352 + 3726) % 10000;
+                    if (h == hash) {
+                        levelCounter = i;
+                        break;
+                    }
+                }
+            }
+            level(true);
             break;
 
         case 1:
