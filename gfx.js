@@ -35,6 +35,11 @@ function drawPlayerAt(x, y) {
         ctx.lineTo(d[0], d[1]);
     });
     ctx.stroke();
+    hist.backIter(function(d, i) {
+        if (i % 3 == 0) {
+            circle(d[0], d[1], 1.5, '#696BFF', 1, true);
+        }
+    });
     // Draw aura
     var grad = ctx.createRadialGradient(posX, posY, 0, posX, posY, 50);
     grad.addColorStop(0, 'rgba(54,57,255,0.3)');
@@ -74,7 +79,6 @@ function rr(x, y, l, c, r) {
     ctx.translate(x, y);
     ctx.rotate(r);
     ctx.fillRect(-0.5*l, -0.5*l, l, l);
-    console.log(x, y, l);
     ctx.rotate(-r);
     ctx.translate(-x, -y);
 

@@ -23,7 +23,7 @@ History.prototype.add = function(x, y, vx, vy) {
 
 History.prototype.backIter = function(f) {
     for (var i = this.hi; i >= this.li; i--) {
-        f(this.h[i]);
+        f(this.h[i], i);
     }
 }
 
