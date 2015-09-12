@@ -63,7 +63,13 @@ function drawPlanets() {
 }
 
 function drawAsteroidAt(x, y) {
-    circle(x, y, 3, '#ffffff', 1, true);
+    // Draw aura
+    var grad = ctx.createRadialGradient(x, y, 0, x, y, 50);
+    grad.addColorStop(0, 'rgba(255,40,40,0.2)');
+    grad.addColorStop(1, 'rgba(255,40,40,0.0)');
+    circle(x, y, 50, grad, 1, true);
+    // Draw body
+    circle(x, y, 3, '#ff2828', 1, true);
 }
 
 function planetColor(p, op, f) {
