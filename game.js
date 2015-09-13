@@ -166,7 +166,7 @@ function gameLoop() {
             if (loc.search(/h=/) >= 0) {
                 var hash = loc.substr(loc.search(/h=/)+2);
                 for (var i = 0; i <= 1000; i++) { // As if anyone would play this past 1000 levels
-                    var h = (i * 2352 + 3726) % 10000;
+                    var h = (i * 2353 + 3727) % 10000;
                     if (h == hash) {
                         levelCounter = i;
                         break;
