@@ -4,6 +4,7 @@ var ctx = can.getContext("2d"); // The 2D draw context
 var levelCounter = 0; // The current level
 var score = 0; // Score of current level
 var winScore = 0; // Score necessary to beat current level
+var fail = 0; // How often the player has failed on the current level
 var gameState = 0; // The current game state:
                    // 0 means the game is unitilazied
                    // 1 means the game is running a level normally
@@ -121,6 +122,7 @@ function level(next) {
             if (next) {
                 resetPlanets = getPlanets();
                 resetPositions = getPositions();
+                fail = 0;
             }
             planets = clone(resetPlanets);
             positions = clone(resetPositions);
@@ -139,6 +141,7 @@ function level(next) {
     hist.reset();
     $('lvl').innerHTML = 'Level ' + (levelCounter + 1);
     $('ast').innerHTML = 'Asteroids ' + score + '/' + winScore;
+    $('skip').style.display = 'none';
 }
 
 function collided() {
@@ -185,6 +188,9 @@ function gameLoop() {
                 fc[1] = 26; // We cheat a bit so no explosion is drawn when player
                             // leaves the bounds
             }
+            if (fail >= 3 && levelCounter > 2) {
+                $('skip').style.display = 'block';
+            }
             break;
 
         case 2:
@@ -195,6 +201,7 @@ function gameLoop() {
                 fc[1]++;
             } else {
                 fc[1] = 0;
+                fail++;
                 level(false);
                 gameState = 1;
             }
@@ -203,6 +210,7 @@ function gameLoop() {
         case 3:
             levelCounter++;
             level(true);
+            fail = 0;
             gameState = 1;
             break;
     }
