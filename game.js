@@ -26,6 +26,10 @@ shiftY = Math.max(0.5 * (can.height - 800));
 ctx.scale(1 / scaleX, 1 / scaleY);
 ctx.translate(shiftX, shiftY);
 
+// Gfx stuff
+var img; // The background image for the canvas to avoid having it to render every frame
+var twinkles = []; // Twinkle, twinkle, little star
+
 // Input
 var keyStatus = [0,0,0,0]; // Status of input keys. 0 is space, 2 is escape, 1 is everything else
                     // 0 = not pressed,
@@ -48,6 +52,8 @@ var resetPositions; // Used in reseting the level without triggering recalculati
 // Aliases
 var r = Math.random;
 var o = Math.round;
+var min = Math.min;
+var max = Math.max;
 var sin = Math.sin;
 var cos = Math.cos;
 var pi = Math.PI;

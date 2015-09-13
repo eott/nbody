@@ -12,7 +12,35 @@ function circle(x, y, radius, color, width, fill) {
 }
 
 function drawBackground() {
+    if (!img) {
+        // Draw stuff
+        ctx.fillStyle = '#ffffff';
+        for (var i = 0; i < 1000; i++) {
+            ctx.fillRect(can.width * r() - shiftX, can.height * r() - shiftY, 1, 1);
+        }
+        for (var i = 0; i < 50; i++) {
+            twinkles[i] = [
+                can.width * r() - shiftX,
+                can.height * r() - shiftY,
+                [o(min(255, 255*r())), o(min(255, 255*r())), o(min(255, 255*r()))],
+                o(60 * r())
+            ];
+        }
+        // Save image
+        img = new Image();
+        img.src = can.toDataURL("image/png");
+        can.style.background = 'url(' + img.src + ')';
+    }
     ctx.clearRect(-shiftX * scaleX, -shiftY * scaleY, can.width * scaleX, can.height * scaleY);
+    for (var i = 0; i < twinkles.length; i++) {
+        var p = ((twinkles[i][3] + fc[0]) % 60) / 30;
+        ctx.fillStyle = 'rgba(' + twinkles[i][2][0]
+            + ',' + twinkles[i][2][1]
+            + ',' + twinkles[i][2][2]
+            + ',' + (p > 1 ? 2-p : p)
+            + ')';
+        ctx.fillRect(twinkles[i][0], twinkles[i][1], 2, 2);
+    }
 }
 
 function drawExplosion() {
