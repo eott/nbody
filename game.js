@@ -118,6 +118,10 @@ function level(next) {
             planets = [[400,300,0.5,[50,120,true,0,0,false]]];
             positions = [400,200,5,0];
             break;
+        case 3:
+            planets = [[400,300,1.0,[50,50,true,0,0,false]],[200,200,0.3,[150,250,true,0,0,false]]];
+            positions = [550,100,1.5,2.5];
+            break;
         default:
             if (next) {
                 resetPlanets = getPlanets();
@@ -189,7 +193,7 @@ function gameLoop() {
                 fc[1] = 26; // We cheat a bit so no explosion is drawn when player
                             // leaves the bounds
             }
-            if (fail >= 3 && levelCounter > 2) {
+            if (fail >= 3 && levelCounter > 3) {
                 $('skip').style.display = 'block';
             }
             break;
