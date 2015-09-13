@@ -1,3 +1,13 @@
+// Aliases
+var r = Math.random;
+var o = Math.round;
+var min = Math.min;
+var max = Math.max;
+var sin = Math.sin;
+var cos = Math.cos;
+var sqrt = Math.sqrt;
+var pi = Math.PI;
+
 // Game and meta globals
 var can = $("screen"); // The canvas element
 var ctx = can.getContext("2d"); // The 2D draw context
@@ -19,10 +29,10 @@ var fc = [0,0,0,0]; // Frame counters, they simply count upward once a frame
 // Scaling and centering
 can.width = window.innerWidth - 5;
 can.height = window.innerHeight - 5;
-scaleX = Math.max(1, 1000 / can.width);
-scaleY = Math.max(1, 800 / can.height);
-shiftX = Math.max(0.5 * (can.width - 1000));
-shiftY = Math.max(0.5 * (can.height - 800));
+scaleX = max(1, 1000 / can.width);
+scaleY = max(1, 800 / can.height);
+shiftX = max(0.5 * (can.width - 1000));
+shiftY = max(0.5 * (can.height - 800));
 ctx.scale(1 / scaleX, 1 / scaleY);
 ctx.translate(shiftX, shiftY);
 
@@ -49,15 +59,6 @@ var planets; // The planets; see getPlanets for structure
 var resetPlanets; // Used in reseting the level without triggering recalculation
 var resetPositions; // Used in reseting the level without triggering recalculation
 
-// Aliases
-var r = Math.random;
-var o = Math.round;
-var min = Math.min;
-var max = Math.max;
-var sin = Math.sin;
-var cos = Math.cos;
-var pi = Math.PI;
-
 /**
  * Generated the planets, asteroids and other game objects for a level. The return
  * object is an array of array, where each inner array is a planet and has the
@@ -78,18 +79,18 @@ var pi = Math.PI;
  */
 function getPlanets() {
     var a = [];
-    for (var i=0; i < Math.round(1 + 2 * Math.random()); i++) {
+    for (var i=0; i < o(1 + 2 * r()); i++) {
         a[i] = [
-            Math.round(100 + 600 * Math.random()),
-            Math.round(50 + 500 * Math.random()),
-            0.1 + 0.9 * Math.random(),
+            o(100 + 600 * r()),
+            o(50 + 500 * r()),
+            0.1 + 0.9 * r(),
             [
-                Math.round(60 + 25 * Math.random()),
-                Math.round(100 + 50 * (Math.random() - 1)),
+                o(60 + 25 * r()),
+                o(100 + 50 * (r() - 1)),
                 true,
-                Math.round(60 + 25 * Math.random()),
-                Math.round(100 + 50 * (Math.random() - 1)),
-                (Math.random() > 0.5),
+                o(60 + 25 * r()),
+                o(100 + 50 * (r() - 1)),
+                (r() > 0.5),
             ],
         ]
     }

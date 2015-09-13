@@ -50,10 +50,10 @@ function doMovement() {
     for (var i = 0; i < planets.length; i++) {
         var dX = posX - planets[i][0];
         var dY = posY - planets[i][1];
-        var r = Math.sqrt(dX*dX+dY*dY);
+        var r = sqrt(dX*dX+dY*dY);
         var s = (g * planets[i][2]) / (r * r);
-        vX += s * Math.sin(0.5 * Math.PI * (dX/r));
-        vY += s * Math.sin(0.5 * Math.PI * (dY/r));
+        vX += s * sin(0.5 * pi * (dX/r));
+        vY += s * sin(0.5 * pi * (dY/r));
 
         if (r < (10 + 20 * planets[i][2])) {
             collided();
@@ -88,11 +88,11 @@ function doMovement() {
     for (var i = 0; i < planets.length; i++) {
         for (var k = 0; k < 4; k += 3) {
             if (planets[i][3][2+k]) {
-                var period = 2 * Math.PI * ((fc[0] % planets[i][3][1+k]) / planets[i][3][1+k]);
-                ax = planets[i][0] + planets[i][3][0+k] * Math.sin(period);
-                ay = planets[i][1] + planets[i][3][0+k] * Math.cos(period);
+                var period = 2 * pi * ((fc[0] % planets[i][3][1+k]) / planets[i][3][1+k]);
+                ax = planets[i][0] + planets[i][3][0+k] * sin(period);
+                ay = planets[i][1] + planets[i][3][0+k] * cos(period);
                 drawAsteroidAt(ax, ay);
-                if (Math.sqrt((posX - ax) * (posX - ax) + (posY - ay) * (posY - ay)) < 30) {
+                if (sqrt((posX - ax) * (posX - ax) + (posY - ay) * (posY - ay)) < 30) {
                     planets[i][3][2+k] = false;
                     score++;
                     $('ast').innerHTML = 'Asteroids ' + score + '/' + winScore;
