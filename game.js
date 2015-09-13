@@ -147,7 +147,7 @@ function level(next) {
 function collided() {
     gameState = 2;
     fc[1] = 0;
-    audio[1].play();
+    play(1);
 }
 
 function gameLoop() {
@@ -185,7 +185,7 @@ function gameLoop() {
                 gameState = 3;
             } else if (checkBounds()) {
                 gameState = 2;
-                audio[3].play();
+                play(3);
                 fc[1] = 26; // We cheat a bit so no explosion is drawn when player
                             // leaves the bounds
             }

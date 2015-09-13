@@ -25,6 +25,12 @@ function initMusic() {
     }
 }
 
+function play(i) {
+    audio[i].pause();
+    audio[i].currentTime = 0;
+    audio[i].play();
+}
+
 function mute() {
     muted = !muted;
     for (var i = 0; i < audio.length; i++) {
