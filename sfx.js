@@ -3,10 +3,11 @@ var audio = [];
 var muted = false;
 
 function initMusic() {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 4; i++) {
         // Initialize music generation (player).
         var player = new CPlayer();
-        player.init(i == 0 ? song : (i == 1 ? explosion : pickup));
+        var d = [song, explosion, pickup, abscond];
+        player.init(d[i]);
         player.generate();
         player.generate();
 

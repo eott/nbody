@@ -185,6 +185,7 @@ function gameLoop() {
                 gameState = 3;
             } else if (checkBounds()) {
                 gameState = 2;
+                audio[3].play();
                 fc[1] = 26; // We cheat a bit so no explosion is drawn when player
                             // leaves the bounds
             }
